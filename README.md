@@ -4,8 +4,8 @@
 1. [Concepts to get better at competitive programming](https://discuss.codechef.com/questions/121107/programming-contest-detailed-syllabus-along-with-example-problems)
 2. [Recursion from Introduction to Programming](https://introcs.cs.princeton.edu/java/23recursion/)
 3. Recursion related links:
-    - [Mastering Recursive Programming][1]
-    - [Quora][2]
+    - [Mastering recursive programming][1]
+    - [Why am I not able to solve difficult recursive problems][2]
     - [What is the best way to master recursion?][3]
     - [Understanding stack unwinding][4]
 

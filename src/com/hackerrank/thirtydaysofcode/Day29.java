@@ -12,19 +12,28 @@ public class Day29 {
       int n = s.nextInt();
       int k = s.nextInt();
       
-      double pow = 1;
-      int x = (int) 1;
-      int y = (int) 1 << 1;
-      while (y <= n && (x&y) < k) {
-        System.out.println("pow=" + pow + " x=" + Integer.toBinaryString(x) 
-          + " y=" + Integer.toBinaryString(y) + " x&y=" + (x&y));
-//        pow++;
-        x = (int) x + (x << 1);
-        y = (int) y + (y << 1);
-      }
-      System.out.println("pow=" + pow + " x=" + x + " y=" + y + " x&y=" + (x&y));
+      int a = n;
+      int b = n-1;
       
-      System.out.println( (x >> 1 ) & (y >> 1) );
+      int maxk = 0;
+      
+      while (a > 0) {
+    	  
+    	  while (b > 0) {
+    		  int x = a & b;
+    		  
+    		  //System.out.println("a=" + a + " b=" + b + "x=" + x);
+    		  if (x < k && maxk < x) {
+    			  maxk = x;
+    		  }
+    		  b--;
+    	  }
+    	  
+    	  a--;
+    	  b = a-1;
+      }
+      
+      System.out.println(maxk);
     }
     
     s.close();

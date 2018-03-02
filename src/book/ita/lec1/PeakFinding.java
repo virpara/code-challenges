@@ -3,7 +3,7 @@ package book.ita.lec1;
 public class PeakFinding {
 
 	public static void main(String[] args) {
-		int[] n = {55};
+		int[] n = {};
 		
 		System.out.println(findPeakElement(n));
 	}

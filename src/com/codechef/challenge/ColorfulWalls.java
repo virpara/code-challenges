@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 /**
  * https://www.codechef.com/BITF2017
- * @author Nividous01
+ * @author Rahul
  *
  */
 public class ColorfulWalls {

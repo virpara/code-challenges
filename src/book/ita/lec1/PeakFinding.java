@@ -7,6 +7,7 @@ public class PeakFinding {
 
         System.out.println("find1dPeakElement: " + find1dPeakElement(n));
         System.out.println("find1dPeakLinearly: " + find1dPeakLinearly(n));
+        System.out.println("find1dPeakCleverLinearly: " + find1dPeakCleverLinearly(n));
 
         int[][] p = {{1,2,0,0,0}, {2,3,2,0,0}, {3,4,1,0,0}, {4,5,0,0,0}, {5,6,7,0,0}};
         System.out.println("findPeak2dGreedyAscent: " + findPeak2dGreedyAscent(p));
@@ -23,7 +24,7 @@ public class PeakFinding {
     }
 
     private static int findPeak2dGreedyAscent(int[][] n, int i, int j) {
-        System.out.println("i=" + i + " j=" + j);
+        //System.out.println("i=" + i + " j=" + j);
 
         // top element is greater or equal
         if (i - 1 >= 0 && n[i][j] <= n[i - 1][j]) return findPeak2dGreedyAscent(n, i - 1, j);
@@ -42,7 +43,6 @@ public class PeakFinding {
 
     }
 
-
     /**
      * Find 2d peak by brute-force
      * @param n 2d matrix to look for a peak
@@ -52,7 +52,7 @@ public class PeakFinding {
         for (int i = 0; i < n.length-1; i++) {
             int[] row = n[i];
             for (int j = 0; j < row.length-1; j++) {
-                System.out.println("i=" + i + " j=" + j);
+                //System.out.println("i=" + i + " j=" + j);
                 if (is2dPeak(n, i, j)) {
                     return n[i][j];
                 }
@@ -99,6 +99,17 @@ public class PeakFinding {
         }
 
         return -1;
+    }
+
+    // clever linear solution
+    private static int find1dPeakCleverLinearly(int[] nums) {
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] < nums[i - 1]) {
+                return i-1;
+            }
+        }
+
+        return nums.length - 1;
     }
 
     private static int find1dPeakElement(int[] nums) {

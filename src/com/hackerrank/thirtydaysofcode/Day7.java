@@ -2,7 +2,6 @@ package com.hackerrank.thirtydaysofcode;
 
 import java.util.Scanner;
 
-
 public class Day7 {
 
     public static void main(String[] args) {
@@ -13,9 +12,9 @@ public class Day7 {
             arr[i] = in.nextInt();
         }
         in.close();
-        
+
         for (int i = arr.length - 1; i >= 0; i--) {
-        	System.out.print(arr[i] + " ");
+            System.out.print(arr[i] + " ");
         }
     }
 }

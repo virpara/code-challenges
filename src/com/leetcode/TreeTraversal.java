@@ -1,9 +1,7 @@
 package com.leetcode;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.List;
+import java.math.BigDecimal;
+import java.util.*;
 
 public class TreeTraversal {
 
@@ -98,6 +96,81 @@ public class TreeTraversal {
         }
     }
 
+    // level order (BSF) traversal
+    // returns list having a list of elements in level
+    private List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> ls = new ArrayList<>();
+        Queue<TreeNode> q = new LinkedList<>();
+
+        if (root != null)
+            q.add(root);
+
+
+        List<Integer> level = new ArrayList<>();
+
+        while (q.size() > 0) {
+            TreeNode tmp = q.remove();
+
+            level.add(tmp.val);
+
+            if (tmp.left != null) q.add(tmp.left);
+            if (tmp.right != null) q.add(tmp.right);
+        }
+
+        // add dummy value at index 0,
+        // to access same level elements from array using i < 2 ^ i
+        level.add(0, 0);
+
+        Integer[] array = level.toArray(new Integer[0]);
+
+        List<Integer> l = new ArrayList<>();
+        int pow = 1;
+        int lvl = (int) Math.pow(2, pow++);
+        for (int i = 1; i < array.length; i++) {
+
+            if (i == lvl) {
+                lvl = (int) Math.pow(2, pow++);
+                ls.add(l);
+
+                l = new ArrayList<>(); // new list for each level
+            }
+
+            l.add(array[i]);
+
+            // add the last level if array size < 2 ^ pow
+            if (i == array.length - 1) {
+                ls.add(l);
+            }
+        }
+
+        return ls;
+    }
+
+//    /**
+//     * we assume the node exists in the tree.
+//     * @param root root node of a bst tree
+//     * @param node find the height of node
+//     * @return the height of the node from root node(number of vertices between root and node).
+//     */
+//    private int height(TreeNode root, TreeNode node) {
+//        int findHeightFor = node.val;
+//        int height = -1;
+//
+//        TreeNode tmp = root;
+//        while (tmp != null) {
+//            height++;
+//            if (findHeightFor < tmp.val) {
+//                tmp = tmp.left;
+//            } else if (findHeightFor > tmp.val) {
+//                tmp = tmp.right;
+//            } else {
+//                break;
+//            }
+//        }
+//
+//        return height;
+//    }
+
     public static void main(String[] args) {
         TreeNode root = new TreeNode(1);
         root.right = new TreeNode(2);
@@ -113,6 +186,8 @@ public class TreeTraversal {
 
         System.out.println("postorderTraversal: " + t.postorderTraversal(root));
         System.out.println("postorderTraversalRecursive:" + t.postorderTraversalRecursive(root));
+
+        System.out.println("leverOrder: " + t.levelOrder(root));
     }
 
 }

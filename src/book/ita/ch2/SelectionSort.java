@@ -29,12 +29,11 @@ public class SelectionSort {
 	private static void selectionSort(Integer[] a) {
 		for (int i = 0; i < a.length-1; i++) {
 			int tmp = a[i];
-//			int smallest = tmp;
-			int smallestIdx = i; 
+			int smallestIdx = i;
 
 			// find the smallest element from the remaining(i+1..n) elements
 			for (int j = i+1; j < a.length; j++) {
-				if (a[j] < tmp) {
+				if (a[j] < a[smallestIdx]) {
 //					smallest = a[j];
 					smallestIdx = j;
 				}

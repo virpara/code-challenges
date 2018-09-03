@@ -9,13 +9,21 @@ public class Scan {
 		s.close();
 	}
 	
-	
 	public static int[] nia(int n) {
 		int[] a = new int[n];
 		for (int i = 0; i < n; i++) {
 			a[i] = s.nextInt();
 		}
 		
+		return a;
+	}
+
+	public static Integer[] nIa(int n) {
+		Integer[] a = new Integer[n];
+		for (int i = 0; i < n; i++) {
+			a[i] = s.nextInt();
+		}
+
 		return a;
 	}
 	

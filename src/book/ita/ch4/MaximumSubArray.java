@@ -12,6 +12,30 @@ public class MaximumSubArray {
         Scan.close();
 
         System.out.println(Arrays.asList(findMaximumSubarray(a, 0, a.length - 1)));
+        System.out.println(Arrays.asList(findMaximumSubarrayBruteForce(a)));
+    }
+
+    // Exercise 4.1-2 brute force method
+    private static Integer[] findMaximumSubarrayBruteForce(Integer[] a) {
+        int maxSum = Integer.MIN_VALUE;
+        int maxi = 0;
+        int maxj = 0;
+
+        for (int i = 0; i < a.length; i++) {
+            int sum = 0;
+
+            for (int j = i; j < a.length; j++) {
+                sum = sum + a[j];
+                if (sum > maxSum) {
+                    maxSum = sum;
+                    maxi = i;
+                    maxj = j;
+                }
+            }
+        }
+
+        Integer[] ret = {maxi, maxj, maxSum};
+        return ret;
     }
 
     // n log n solution

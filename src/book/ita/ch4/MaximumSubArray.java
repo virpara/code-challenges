@@ -3,28 +3,60 @@ package book.ita.ch4;
 import com.util.Scan;
 
 import java.util.Arrays;
+import java.util.Random;
 
 public class MaximumSubArray {
     public static void main(String[] args) {
 
         int n = Scan.ni();
-        Integer[] a = Scan.nIa(n);
+//        Integer[] a = Scan.nIa(n);
         Scan.close();
 
-        System.out.println(Arrays.asList(findMaximumSubarray(a, 0, a.length - 1)));
-        System.out.println(Arrays.asList(findMaximumSubarrayBruteForce(a)));
+        long start = 0L;
+        long end = 0L;
+        long ddTime = 0L;
+        long bTime = 0L;
+        Integer[] ans = null;
+        Integer[] a = null;
+        Random r = new Random();
+
+        // Exercise 4.1-3 problem size 24 to 30 is the crossover point
+        // run various problem sizes to find the n after which divide and conquer solution is faster
+        for (int x = 5; x <= n; x++) {
+            a = new Integer[x];
+            for (int y = 0; y < x; y++) {
+                a[y] = r.nextInt();
+            }
+
+            // run the test
+            start = System.nanoTime();
+            ans = findMaximumSubarray(a, 0, a.length - 1);
+            end = System.nanoTime();
+            ddTime = end - start;
+            System.out.println("Divide and Conquer: " + ddTime + " ns " + Arrays.asList(ans));
+
+            start = System.nanoTime();
+            ans = findMaximumSubarrayBruteForce(a, 0, a.length - 1);
+            end = System.nanoTime();
+            bTime = end - start;
+            System.out.println("Brute force: " + bTime + " ns " + Arrays.asList(ans));
+
+            String winner = bTime < ddTime ? "Brute Force" : "DD";
+            System.out.println("Problem size " + x + " winner is " + winner);
+        }
+
     }
 
     // Exercise 4.1-2 brute force method
-    private static Integer[] findMaximumSubarrayBruteForce(Integer[] a) {
+    private static Integer[] findMaximumSubarrayBruteForce(Integer[] a, int low, int high) {
         int maxSum = Integer.MIN_VALUE;
         int maxi = 0;
         int maxj = 0;
 
-        for (int i = 0; i < a.length; i++) {
+        for (int i = low; i < high; i++) {
             int sum = 0;
 
-            for (int j = i; j < a.length; j++) {
+            for (int j = i; j < high; j++) {
                 sum = sum + a[j];
                 if (sum > maxSum) {
                     maxSum = sum;
@@ -45,6 +77,11 @@ public class MaximumSubArray {
         if (high == low) { // base case: only one element
             return ret;
         } else {
+//             use brute force for problem size less than crossover point
+//            if (high - low < 30) {
+//                return findMaximumSubarrayBruteForce(a, low, high);
+//            }
+
             int mid = (low + high) / 2;
             Integer[] left = findMaximumSubarray(a, low, mid);
             Integer[] right = findMaximumSubarray(a, mid + 1, high);

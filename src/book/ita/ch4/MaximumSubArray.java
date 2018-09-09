@@ -5,6 +5,9 @@ import com.util.Scan;
 import java.util.Arrays;
 import java.util.Random;
 
+// todo: exercises 4.1-4, 4.1-5
+// Exercise 4.1-1 : it returns the biggest number from all negative numbers
+
 public class MaximumSubArray {
     public static void main(String[] args) {
 
@@ -21,7 +24,7 @@ public class MaximumSubArray {
         Random r = new Random();
 
         // Exercise 4.1-3 problem size 24 to 30 is the crossover point
-        // run various problem sizes to find the n after which divide and conquer solution is faster
+        // run various problem sizes to find the n-zero after which divide and conquer solution is faster
         for (int x = 5; x <= n; x++) {
             a = new Integer[x];
             for (int y = 0; y < x; y++) {
@@ -122,7 +125,6 @@ public class MaximumSubArray {
             }
         }
 
-        Integer[] ret = {maxLeft, maxRight, leftSum + rightSum};
-        return ret;
+        return new Integer[]{maxLeft, maxRight, leftSum + rightSum};
     }
 }

@@ -1,42 +1,43 @@
-package com.oracle;	
+package com.oracle;
+
+import com.util.Scan;
+
+/**
+ * Generate all the anagrams of the given word.
+ */
 
 public class WordAnagrams {
-	// TODO
-	static void anagram(char[] chs, int j) {
-		if (j == chs.length) return;
-		
-		
-		anagram(chs, j);
-	}
-	
-	public static void main(String[] args) {
-		String word = "abcde";
-		
-		char[] chs = word.toCharArray();
-		
-		prepare(chs, 1);
-		
-	}
-	public static void prepare(char[] w, int i) {
-		System.out.println(String.valueOf(w));
-		if (i <= w.length-1) {
-			swap(w, 0, i);
-			prepare(w, i+1);
-		}
-		
-		
-	}
-	public static void anagram(char[] w, int a, int i, int j) {
-		
-	}
-	
-	public static void swap(char[] word, int i, int j) {
-//		if (i > word.length - 1 || j > word.length - 1) throw new IllegalArgumentException();
-		
-		char c = word[i];
-		word[i] = word[j];
-		word[j] = c;
-	}
-	
+    private static boolean[] isChsIUsed;
 
+    private static void word(int idx, char[] chs, char[] word) {
+        // we have shuffled all the characters, so just print them now
+        if (idx == chs.length) {
+            System.out.println(new String(word));
+            return;
+        }
+
+        for (int i = 0; i < chs.length; i++) {
+            if (isChsIUsed[i]) continue;
+
+            word[idx] = chs[i];
+            isChsIUsed[i] = true;
+
+            word(idx + 1, chs, word);
+
+            isChsIUsed[i] = false;
+        }
+    }
+
+    public static void main(String[] args) {
+        System.out.print("Enter a word: ");
+        String word = Scan.ns();
+        char[] chs = word.toCharArray();
+
+        // tmp var to hold an anagram
+        char[] tmp = new char[word.length()];
+        isChsIUsed = new boolean[chs.length];
+
+        word(0, chs, tmp);
+
+    }
 }

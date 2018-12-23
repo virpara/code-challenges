@@ -53,7 +53,8 @@ public class Heap {
 
         System.out.println(Arrays.asList(array));
         if (this.size > 1) {
-            buildMaxHeap(1);
+//            buildMaxHeap(1);
+            buildMaxHeapBetter();
         }
     }
 
@@ -63,9 +64,6 @@ public class Heap {
         Heap h = new Heap(arr);
         h.print();
         System.out.println("iterations: " + h.counter);
-//        h.maxHeapify();
-//        h.print();
-
     }
 
     public void print() {
@@ -80,7 +78,6 @@ public class Heap {
 
     // convert random input array to max heap
     // we can take top-down or down-up approach
-
     /**
      * Build max heap of the user given array. Fix the heap property,
      * if it is violated by any element.
@@ -119,38 +116,33 @@ public class Heap {
             // heap is modified so make sure the level after parentIdx is again built for heap property
             buildMaxHeap(parentIdx);
         }
-
     }
 
-    // max heapify should heapify both the sides when it is called for initial input
-    // because user input cannot guarantee that either side satisfies heap property.
-    // we shouldn't heapify the whole heap when any element is extracted since the element
-    // would unsatisfy only one side of the heap tree.
-    public void maxHeapify() {
-        // we should follow bottom up approach because it allows us to decide which children
-        // should be swapped with parent. This allows us to bubble up the greatest values.
-        maxHeapify(heap.length - 1);
+    public void buildMaxHeapBetter() {
+        for(int i = size / 2; i > 0; i--) {
+            maxHeapify(i);
+        }
     }
 
+    /**
+     * Restore the heap property at specified indext. Assumes left and
+     * right children satisfies heap property
+     * @param idx element index
+     */
     public void maxHeapify(int idx) {
-//        int l = left(idx);
-//        int r = right(idx);
-//
-//        int largest = idx;
-//
-//        if (l < heap.length && heap[idx] < heap[l]) {
-//            largest = l;
-//        }
-//
-//        if (r < heap.length && heap[largest] < heap[r]) {
-//            largest = r;
-//        }
-//
-//        if (largest != idx) {
-//            swap(idx, largest);
-//
-//            maxHeapify(largest);
-//        }
+        counter++;
+
+        int l = left(idx);
+        int r = right(idx);
+
+        int largest = idx;
+        if (l < size && heap[idx] < heap[l]) largest = l;
+        if (r < size && heap[largest] < heap[r]) largest = r;
+
+        if (largest != idx) {
+            swap(idx, largest);
+            maxHeapify(largest);
+        }
 
     }
 

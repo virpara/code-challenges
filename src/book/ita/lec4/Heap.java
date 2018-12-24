@@ -46,6 +46,8 @@ public class Heap {
      * @param heapSize heap size
      */
     public Heap(Integer[] array, int heapSize) {
+        if (heapSize < array.length) heapSize = 2 * array.length;
+
         heap = new Integer[heapSize];
 
         System.arraycopy(array, 0, heap, 0, array.length);
@@ -59,11 +61,12 @@ public class Heap {
     }
 
     public static void main(String[] args) {
-        Integer[] arr = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        Integer[] arr = {0, 1, 2, 3, 4, 5};
 
         Heap h = new Heap(arr);
-        h.print();
-        System.out.println("iterations: " + h.counter);
+//        h.print();
+//        System.out.println("iterations: " + h.counter);
+        h.heapSort();
     }
 
     public void print() {
@@ -125,7 +128,7 @@ public class Heap {
     }
 
     /**
-     * Restore the heap property at specified indext. Assumes left and
+     * Restore the heap property at specified index. Assumes left and
      * right children satisfies heap property
      * @param idx element index
      */
@@ -189,9 +192,24 @@ public class Heap {
     }
 
     public int extractMax() {
-        int value = 0;
+        int value = -1;
 
+        if (!isEmpty()) {
+            value = heap[1];  // get maximum element
+            size--;
+            swap(1, size);   // swap heap[1] with heap[size]
+            heap[size] = null;  // discard the last element. it was the root before we swapped.
+
+            // heapify if there are more elements
+            if (!isEmpty())
+                maxHeapify(1);  // new root could violate heap property, so heapify it
+
+        }
         return value;
+    }
+
+    public boolean isEmpty() {
+        return size <= 1;
     }
 
     public void insertMin(int value) {
@@ -204,8 +222,12 @@ public class Heap {
         return value;
     }
 
-    public void heapsort() {
+    public void heapSort() {
+        while (!isEmpty()) {
+            System.out.print(extractMax() + " ");
+        }
 
+        System.out.println();
     }
 
 }

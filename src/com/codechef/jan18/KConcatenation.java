@@ -70,6 +70,7 @@ public class KConcatenation {
 			System.out.println(maxSum);
 
 		}
+		s.close();
 
 	}
 
@@ -102,14 +103,12 @@ public class KConcatenation {
 			br.flush();
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			if (br != null) {
 				try {
 					br.close();
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}

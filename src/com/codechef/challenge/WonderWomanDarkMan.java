@@ -13,6 +13,8 @@ public class WonderWomanDarkMan {
     for (int i = 0; i < n; i++) {
       num[i] = sc.next();
     }
+
+    sc.close();
     
     Arrays.sort(num);
     

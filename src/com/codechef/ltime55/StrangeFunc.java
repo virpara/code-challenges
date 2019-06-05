@@ -17,6 +17,7 @@ public class StrangeFunc {
 			
 			System.out.println(ans);
 		}
+		s.close();
 	}
 	
 	static long f(long a) {

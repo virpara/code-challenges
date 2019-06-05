@@ -36,7 +36,7 @@ public class Demo {
 		Kingdom water = new Kingdom("Water", "Octopus");
 		Kingdom fire = new Kingdom("Fire", "Dragon");
 		
-		/*System.out.println("Air: " + Kingdom.isWin("Air, \"Let’s swing the sword together\""));
+		/*System.out.println("Air: " + Kingdom.isWin("Air, \"Letâ€™s swing the sword together\""));
 		System.out.println("Land: " + Kingdom.isWin("Land, \"Die orplay the tame of thrones\""));
 		System.out.println("Ice: " + Kingdom.isWin("Ice, \"Ahoy! Fight for me with men and money\""));
 		System.out.println("Water: " + Kingdom.isWin("Water, \"Summer is coming\""));

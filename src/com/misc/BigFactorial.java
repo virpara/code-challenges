@@ -17,7 +17,7 @@ public class BigFactorial {
   }
   
   static BigInteger fib(BigInteger i) {
-    if (i.equals(1) || i.equals(2)) {
+    if (i.equals(Integer.valueOf(1)) || i.equals(Integer.valueOf(2))) {
       return BigInteger.valueOf(1);
     } else {
       return fib(i.subtract(BigInteger.valueOf(1))).add(fib(i.subtract(BigInteger.valueOf(1))));

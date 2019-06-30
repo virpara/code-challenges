@@ -3,7 +3,7 @@ package com.misc;
 public class EuclidGcd {
 
 	public static void main(String[] args) {
-		System.out.println(gcd(6, 10));
+		System.out.println(gcd(9900, 9));
 
 	}
 	

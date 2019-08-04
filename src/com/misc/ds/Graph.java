@@ -38,7 +38,36 @@ public class Graph {
         System.out.println();
 
         g.bfs_traversal();
+        System.out.println();
+
+        System.out.println("number of paths from 0 to 6: " + g.numberOfPaths(0, 1));
     }
+
+    public int numberOfPaths(int u, int v) {
+        boolean[] isVisited = new boolean[edges.length];
+        return numPaths(u, v, isVisited);
+    }
+
+    private int numPaths(int u, int v, boolean[] isVisited) {
+        if (u == v) {
+            return 1;
+        }
+
+        isVisited[u] = true;
+        int paths = 0;
+        EdgeNode e = edges[u];
+        while (e != null) {
+            if (!isVisited[e.getV()]) {
+                paths += numPaths(e.getV(), v, isVisited);
+            }
+
+            e = e.getNext();
+        }
+        isVisited[u] = false;
+
+        return paths;
+    }
+
 
     public void bfs_traversal() {
         if (edges.length == 0) return;

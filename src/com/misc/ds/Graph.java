@@ -1,5 +1,8 @@
 package com.misc.ds;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class Graph {
     private EdgeNode[] edges;
     private int edgeCount = 0;
@@ -32,6 +35,41 @@ public class Graph {
         g.print();
         
         g.dfs_traversal();
+        System.out.println();
+
+        g.bfs_traversal();
+    }
+
+    public void bfs_traversal() {
+        if (edges.length == 0) return;
+
+        boolean[] isVisited = new boolean[edges.length];
+
+        Queue<Integer> q = new LinkedList<>();
+
+        for (int i = 0; i < edges.length; i++) {  // make sure we visit other unreachable nodes from 0
+            if (!isVisited[i]) {
+                q.add(i);
+                isVisited[i] = true;
+            }
+
+            while (!q.isEmpty()) {
+                int u = q.remove();
+                System.out.print(u + " ");
+
+                EdgeNode e = edges[u];
+                while (e != null) {
+                    int v = e.getV();
+
+                    if (!isVisited[v]) {
+                        q.add(v);
+                        isVisited[v] = true;
+                    }
+
+                    e = e.getNext();
+                }
+            }
+        }
     }
 
     public void dfs_traversal() {

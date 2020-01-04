@@ -1,4 +1,4 @@
-package com.prob;
+package com.misc;
 
 import java.util.*;
 

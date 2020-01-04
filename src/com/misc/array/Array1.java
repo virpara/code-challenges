@@ -1,4 +1,4 @@
-package com.prob.array;
+package com.misc.array;
 
 public class Array1 {
 

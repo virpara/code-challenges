@@ -15,6 +15,21 @@ public class Main {
 
     public static void main(String[] args) {
         // case 1
+//        Start s = new Start();
+//
+//        Action a1 = new Action("Log1");
+//        s.next = a1;
+//
+//        Action a2 = new Action("false condition");
+//        a1.next = a2;
+//
+//        Action a3 = new Action("common");
+//        a2.next = a3;
+//
+//        End e = new End();
+//        a3.next = e;
+
+        // case 2
         Start s = new Start();
 
         Action a = new Action("Log1");
@@ -24,13 +39,13 @@ public class Main {
         a.next = c;
 
         Action f1 = new Action("false condition");
-        c.falsy = f1;
+        c.falseNode = f1;
 
         Action f2 = new Action("false condition2");
         f1.next = f2;
 
         Action t1 = new Action("true condition");
-        c.truthy = t1;
+        c.trueNode = t1;
 
         Action tf = new Action("common");
 
@@ -41,9 +56,7 @@ public class Main {
         tf.next = e;
 
         traversePrepare(s, stack);
-
-        System.out.println("case 1 ends");
-
+        System.out.println("case traversal ends");
         traversePrint(stack);
     }
 
@@ -63,11 +76,11 @@ public class Main {
             s.add(node);
             Condition c = (Condition) node;
 
-            if (c.truthy != null) trueNodes.put(c, new Stack<>());
-            if (c.falsy != null) falseNodes.put(c, new Stack<>());
+            if (c.trueNode != null) trueNodes.put(c, new Stack<>());
+            if (c.falseNode != null) falseNodes.put(c, new Stack<>());
 
-            if (trueNodes.containsKey(c)) traversePrepare(c.truthy, trueNodes.get(c));
-            if (falseNodes.containsKey(c)) traversePrepare(c.falsy, falseNodes.get(c));
+            if (trueNodes.containsKey(c)) traversePrepare(c.trueNode, trueNodes.get(c));
+            if (falseNodes.containsKey(c)) traversePrepare(c.falseNode, falseNodes.get(c));
 
         }
     }
@@ -85,7 +98,7 @@ public class Main {
                 System.out.println(((Action) n).name + " isVisited: " + isVisited(n));
                 visited.add(n);
             } else if (n instanceof Condition) {
-                System.out.println(((Condition) n).name + " isVisited: " + isVisited(n));
+                System.out.println(((Condition) n).condition + " isVisited: " + isVisited(n));
                 visited.add(n);
 
                 if (trueNodes.containsKey(n)) {

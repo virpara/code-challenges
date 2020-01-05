@@ -1,13 +1,19 @@
 package diag2code.nodes;
 
 public class Condition extends Node {
-    Node truthy = null;
-    Node falsy = null;
+    Node trueNode = null;
+    Node falseNode = null;
 
-    String name;
+    String condition;
 
     public Condition(String s) {
-        name = s;
+        condition = s;
     }
 
+    @Override
+    public String toString() {
+        return "Condition{" +
+                "condition='" + condition + '\'' +
+                '}';
+    }
 }

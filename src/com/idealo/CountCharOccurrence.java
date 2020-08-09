@@ -1,26 +1,21 @@
 package com.idealo;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
 
-// count the number of occurrence of characters from the given string
+// count the number of occurrence of characters from the given string case-insensitively
 
 class CountCharOccurrence {
 	public static void main(String[] args) {
 		Scanner s = new Scanner(System.in);
 
-		String str = s.next();
+		String str = s.nextLine();
 
 		Map<Character, Integer> map = new HashMap<>();
 
 		for (char c : str.toUpperCase().toCharArray()) {
-			Integer count = map.get(c);
-
-			if (count != null) {
-				count++;
-				map.put(c, count);
-			} else {
-				map.put(c, 1);
-			}
+			map.compute(c, (key, val) -> val == null ? 1 : val++);
 		}
 		s.close();
 		

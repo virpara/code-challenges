@@ -1,6 +1,5 @@
 package com.leetcode;
 
-import java.math.BigDecimal;
 import java.util.*;
 
 public class TreeTraversal {
@@ -15,24 +14,31 @@ public class TreeTraversal {
         }
     }
 
-    // pre-order binary tree traversal (iterative)
-    public List<Integer> preorderTraversal(TreeNode root) {
-        List<Integer> traversal = new ArrayList<>();
+    public static void main(String[] args) {
+//        TreeNode root = new TreeNode(1);
+//        root.left = new TreeNode(4);
+//        root.right = new TreeNode(2);
+//        root.right.left = new TreeNode(3);
 
-        Deque<TreeNode> stk = new ArrayDeque<TreeNode>();
+        TreeNode root = new TreeNode(3);
+        root.left = new TreeNode(9);
+        root.right = new TreeNode(20);
 
-        if (root != null) stk.push(root);
-        while (stk.size() > 0) {
-            TreeNode tmp = stk.pop();
-            if (tmp != null) {
-                traversal.add(tmp.val);
-                if (tmp.right != null) stk.push(tmp.right);
+        root.right.left = new TreeNode(15);
+        root.right.right = new TreeNode(7);
 
-                if (tmp.left != null) stk.push(tmp.left);
-            }
-        }
+        TreeTraversal t = new TreeTraversal();
 
-        return traversal;
+        System.out.println("preorderTraversalIterative: " + t.preorderTraversalIterative(root));
+        System.out.println("preorderTraversalRecursive:" + t.preorderTraversalRecursive(root));
+
+        System.out.println("inorderTraversalInterative: " + t.inorderTraversalIterative(root));
+        System.out.println("inorderTraversalRecursive: " + t.inorderTraversalRecursive(root));
+
+        System.out.println("postorderTraversalIterative: " + t.postorderTraversalIterative(root));
+        System.out.println("postorderTraversalRecursive:" + t.postorderTraversalRecursive(root));
+
+        System.out.println("leverOrderRecursive: " + t.levelOrderRecursive(root));
     }
 
     public List<Integer> preorderTraversalRecursive(TreeNode root) {
@@ -49,10 +55,22 @@ public class TreeTraversal {
         }
     }
 
-    // TODO in-order binary tree traversal (iterative)
-    public List<Integer> inorderTraversal(TreeNode root) {
+    // pre-order binary tree traversal (iterative)
+    public List<Integer> preorderTraversalIterative(TreeNode root) {
         List<Integer> traversal = new ArrayList<>();
 
+        Deque<TreeNode> stk = new ArrayDeque<TreeNode>();
+
+        if (root != null) stk.push(root);
+        while (stk.size() > 0) {
+            TreeNode tmp = stk.pop();
+            if (tmp != null) {
+                traversal.add(tmp.val);
+                if (tmp.right != null) stk.push(tmp.right);
+
+                if (tmp.left != null) stk.push(tmp.left);
+            }
+        }
 
         return traversal;
     }
@@ -73,9 +91,10 @@ public class TreeTraversal {
         }
     }
 
-    // TODO post-order binary tree traversal (iterative)
-    public List<Integer> postorderTraversal(TreeNode root) {
+    // TODO in-order binary tree traversal (iterative)
+    public List<Integer> inorderTraversalIterative(TreeNode root) {
         List<Integer> traversal = new ArrayList<>();
+
 
         return traversal;
     }
@@ -96,54 +115,11 @@ public class TreeTraversal {
         }
     }
 
-    // level order (BSF) traversal
-    // returns list having a list of elements in level
-    private List<List<Integer>> levelOrder(TreeNode root) {
-        List<List<Integer>> ls = new ArrayList<>();
-        Queue<TreeNode> q = new LinkedList<>();
+    // TODO post-order binary tree traversal (iterative)
+    public List<Integer> postorderTraversalIterative(TreeNode root) {
+        List<Integer> traversal = new ArrayList<>();
 
-        if (root != null)
-            q.add(root);
-
-
-        List<Integer> level = new ArrayList<>();
-
-        while (q.size() > 0) {
-            TreeNode tmp = q.remove();
-
-            level.add(tmp.val);
-
-            if (tmp.left != null) q.add(tmp.left);
-            if (tmp.right != null) q.add(tmp.right);
-        }
-
-        // add dummy value at index 0,
-        // to access same level elements from array using i < 2 ^ i
-        level.add(0, 0);
-
-        Integer[] array = level.toArray(new Integer[0]);
-
-        List<Integer> l = new ArrayList<>();
-        int pow = 1;
-        int lvl = (int) Math.pow(2, pow++);
-        for (int i = 1; i < array.length; i++) {
-
-            if (i == lvl) {
-                lvl = (int) Math.pow(2, pow++);
-                ls.add(l);
-
-                l = new ArrayList<>(); // new list for each level
-            }
-
-            l.add(array[i]);
-
-            // add the last level if array size < 2 ^ pow
-            if (i == array.length - 1) {
-                ls.add(l);
-            }
-        }
-
-        return ls;
+        return traversal;
     }
 
 //    /**
@@ -171,23 +147,40 @@ public class TreeTraversal {
 //        return height;
 //    }
 
-    public static void main(String[] args) {
-        TreeNode root = new TreeNode(1);
-        root.right = new TreeNode(2);
-        root.right.left = new TreeNode(3);
+    // level order (BSF) traversal recursive
+    // returns list having a list of elements in level
+    private List<List<Integer>> levelOrderRecursive(TreeNode root) {
+        List<List<Integer>> ls = new ArrayList<>();
+        Queue<TreeNode> q = new LinkedList<>();
 
-        TreeTraversal t = new TreeTraversal();
+        if (root != null)
+            q.add(root);
 
-        System.out.println("preorderTraversal: " + t.preorderTraversal(root));
-        System.out.println("preorderTraversalRecursive:" + t.preorderTraversalRecursive(root));
 
-        System.out.println("inorderTraversal: " + t.inorderTraversal(root));
-        System.out.println("inorderTraversalRecursive: " + t.inorderTraversalRecursive(root));
+        List<List<Integer>> levels = new ArrayList<>();
 
-        System.out.println("postorderTraversal: " + t.postorderTraversal(root));
-        System.out.println("postorderTraversalRecursive:" + t.postorderTraversalRecursive(root));
+        while (q.size() > 0) {
 
-        System.out.println("leverOrder: " + t.levelOrder(root));
+            int count = q.size();
+            List<Integer> l = new ArrayList<>();
+
+            for (int i = 0; i < count; i++) {
+                TreeNode tmp = q.remove();
+
+                l.add(tmp.val);
+
+                if (tmp.left != null)
+                    q.add(tmp.left);
+
+                if (tmp.right != null)
+                    q.add(tmp.right);
+
+            }
+
+            levels.add(l);
+
+        }
+
+        return levels;
     }
-
 }

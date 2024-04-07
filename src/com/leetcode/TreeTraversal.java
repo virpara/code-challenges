@@ -38,7 +38,7 @@ public class TreeTraversal {
         System.out.println("postorderTraversalIterative: " + t.postorderTraversalIterative(root));
         System.out.println("postorderTraversalRecursive:" + t.postorderTraversalRecursive(root));
 
-        System.out.println("leverOrderRecursive: " + t.levelOrderRecursive(root));
+        System.out.println("leverOrderRecursive: " + t.levelOrderIterative(root));
     }
 
     public List<Integer> preorderTraversalRecursive(TreeNode root) {
@@ -147,9 +147,9 @@ public class TreeTraversal {
 //        return height;
 //    }
 
-    // level order (BSF) traversal recursive
+    // level order (BSF) traversal iterative
     // returns list having a list of elements in level
-    private List<List<Integer>> levelOrderRecursive(TreeNode root) {
+    private List<List<Integer>> levelOrderIterative(TreeNode root) {
         List<List<Integer>> ls = new ArrayList<>();
         Queue<TreeNode> q = new LinkedList<>();
 
@@ -159,7 +159,7 @@ public class TreeTraversal {
 
         List<List<Integer>> levels = new ArrayList<>();
 
-        while (q.size() > 0) {
+        while (!q.isEmpty()) {
 
             int count = q.size();
             List<Integer> l = new ArrayList<>();

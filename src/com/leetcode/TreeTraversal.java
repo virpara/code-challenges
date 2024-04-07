@@ -4,16 +4,6 @@ import java.util.*;
 
 public class TreeTraversal {
 
-    private static class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
-    }
-
     public static void main(String[] args) {
 //        TreeNode root = new TreeNode(1);
 //        root.left = new TreeNode(4);
@@ -38,7 +28,63 @@ public class TreeTraversal {
         System.out.println("postorderTraversalIterative: " + t.postorderTraversalIterative(root));
         System.out.println("postorderTraversalRecursive:" + t.postorderTraversalRecursive(root));
 
-        System.out.println("leverOrderRecursive: " + t.levelOrderIterative(root));
+        System.out.println("leverOrderIterative: " + t.levelOrderIterative(root));
+    }
+
+    // pre-order binary tree traversal (iterative)
+    public List<Integer> preorderTraversalIterative(TreeNode root) {
+        List<Integer> traversal = new ArrayList<>();
+
+        Deque<TreeNode> stk = new ArrayDeque<TreeNode>();
+
+        if (root != null) stk.push(root);
+        while (!stk.isEmpty()) {
+            TreeNode tmp = stk.pop();
+            if (tmp != null) {
+                traversal.add(tmp.val);
+                if (tmp.right != null) stk.push(tmp.right);
+
+                if (tmp.left != null) stk.push(tmp.left);
+            }
+        }
+
+        return traversal;
+    }
+
+    public List<Integer> inorderTraversalIterative(TreeNode root) {
+        List<Integer> traversal = new ArrayList<>();
+        Deque<Pair> stk = new ArrayDeque<>();
+        var rp = new Pair(root, 1);
+        stk.push(rp);
+
+        while (!stk.isEmpty()) {
+            var top = stk.peek();
+
+            switch (top.state) {
+                case 1:
+                    top.state = top.state + 1;
+
+                    if (top.node.left != null) {
+                        var left = new Pair(top.node.left, 1);
+                        stk.push(left);
+                    }
+                    break;
+                case 2:
+                    traversal.add(top.node.val);
+                    top.state = top.state + 1;
+
+                    if (top.node.right != null) {
+                        var right = new Pair(top.node.right, 1);
+                        stk.push(right);
+                    }
+                    break;
+                case 3:
+                    stk.pop();
+                    break;
+            }
+        }
+
+        return traversal;
     }
 
     public List<Integer> preorderTraversalRecursive(TreeNode root) {
@@ -55,20 +101,36 @@ public class TreeTraversal {
         }
     }
 
-    // pre-order binary tree traversal (iterative)
-    public List<Integer> preorderTraversalIterative(TreeNode root) {
+    public List<Integer> postorderTraversalIterative(TreeNode root) {
         List<Integer> traversal = new ArrayList<>();
+        Deque<Pair> stk = new ArrayDeque<>();
+        var rp = new Pair(root, 1);
+        stk.push(rp);
 
-        Deque<TreeNode> stk = new ArrayDeque<TreeNode>();
+        while (!stk.isEmpty()) {
+            var top = stk.peek();
 
-        if (root != null) stk.push(root);
-        while (stk.size() > 0) {
-            TreeNode tmp = stk.pop();
-            if (tmp != null) {
-                traversal.add(tmp.val);
-                if (tmp.right != null) stk.push(tmp.right);
+            switch (top.state) {
+                case 1:
+                    top.state = top.state + 1;
 
-                if (tmp.left != null) stk.push(tmp.left);
+                    if (top.node.left != null) {
+                        var left = new Pair(top.node.left, 1);
+                        stk.push(left);
+                    }
+                    break;
+                case 2:
+                    top.state = top.state + 1;
+
+                    if (top.node.right != null) {
+                        var right = new Pair(top.node.right, 1);
+                        stk.push(right);
+                    }
+                    break;
+                case 3:
+                    traversal.add(top.node.val);
+                    stk.pop();
+                    break;
             }
         }
 
@@ -91,12 +153,14 @@ public class TreeTraversal {
         }
     }
 
-    // TODO in-order binary tree traversal (iterative)
-    public List<Integer> inorderTraversalIterative(TreeNode root) {
-        List<Integer> traversal = new ArrayList<>();
+    private static class Pair {
+        TreeTraversal.TreeNode node;
+        int state;
 
-
-        return traversal;
+        public Pair(TreeTraversal.TreeNode node, int state) {
+            this.node = node;
+            this.state = state;
+        }
     }
 
     // post-order binary tree traversal (recursive)
@@ -115,11 +179,27 @@ public class TreeTraversal {
         }
     }
 
-    // TODO post-order binary tree traversal (iterative)
-    public List<Integer> postorderTraversalIterative(TreeNode root) {
-        List<Integer> traversal = new ArrayList<>();
+    private static class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
 
-        return traversal;
+        TreeNode(int x) {
+            val = x;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            TreeNode treeNode = (TreeNode) o;
+            return val == treeNode.val && Objects.equals(left, treeNode.left) && Objects.equals(right, treeNode.right);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(val, left, right);
+        }
     }
 
 //    /**

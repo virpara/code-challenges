@@ -107,10 +107,10 @@ public class Graph {
         boolean[] isVisited = new boolean[edges.length];
 
         for (int i = 0; i < edges.length; i++)
-            dfs(i, isVisited);
+            dfs_helper(i, isVisited);
     }
 
-    private void dfs(int u, boolean[] isVisited) {
+    private void dfs_helper(int u, boolean[] isVisited) {
         if (isVisited[u]) {
             return;
         }
@@ -121,7 +121,7 @@ public class Graph {
         isVisited[u] = true;
         EdgeNode e = edges[u];
         while (e != null) {
-            dfs(e.getV(), isVisited);
+            dfs_helper(e.getV(), isVisited);
             e = e.getNext();
         }
     }

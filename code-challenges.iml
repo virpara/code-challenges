@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="JAVA_MODULE" version="4">
+  <component name="ExternalSystem" linkedProjectPath="$MODULE_DIR$/../java-examples/gradle-examples" rootProjectPath="$MODULE_DIR$/../java-examples/gradle-examples" />
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$">
@@ -9,20 +10,23 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library" scope="TEST">
-      <library name="JUnit5.3">
+      <library name="JUnit5.4">
         <CLASSES>
-          <root url="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-api/5.5.0/junit-jupiter-api-5.5.0.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/apiguardian/apiguardian-api/1.1.0/apiguardian-api-1.1.0.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-commons/1.5.0/junit-platform-commons-1.5.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/junit-jupiter-5.4.2.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/junit-jupiter-api-5.4.2.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/apiguardian-api-1.0.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/opentest4j-1.1.1.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/junit-platform-commons-1.4.2.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/junit-jupiter-params-5.4.2.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/junit-jupiter-engine-5.4.2.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/junit-platform-engine-1.4.2.jar!/" />
         </CLASSES>
         <JAVADOC />
-        <SOURCES>
-          <root url="jar://$USER_HOME$/.ideaLibSources/junit-jupiter-api-5.5.0-sources.jar!/" />
-          <root url="jar://$USER_HOME$/.ideaLibSources/apiguardian-api-1.1.0-sources.jar!/" />
-          <root url="jar://$USER_HOME$/.ideaLibSources/opentest4j-1.2.0-sources.jar!/" />
-        </SOURCES>
+        <SOURCES />
       </library>
     </orderEntry>
+  </component>
+  <component name="SonarLintModuleSettings">
+    <option name="uniqueId" value="1d617cac-35a1-42ba-96bc-b4d4008ac2b3" />
   </component>
 </module>

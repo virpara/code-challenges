@@ -12,7 +12,8 @@ public class FailSafeTest {
 		phone.put("Samsung", "S5");
 
 		Iterator it = phone.keySet().iterator();
-		phone.put("Samsung", "S8");
+        phone.put("Samsung2", "S8");    // adding a new does not take effect until creating new iterator
+        phone.put("Samsung", "S8");        // changing value of existing key takes effect
 		while(it.hasNext()) {
 			System.out.println(phone.get(it.next()));
 
@@ -21,10 +22,12 @@ public class FailSafeTest {
 			phone.remove("Apple");
 		}
 
+        System.out.println("\nnext iteration:");
 		it = phone.keySet().iterator();
 		while(it.hasNext()) {
 			System.out.println(phone.get(it.next()));
 		}
 	}
+
 
 }

@@ -1,6 +1,9 @@
 package diag2code.nodes;
 
-import java.util.*;
+import java.util.Deque;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Set;
 
 public class Solution {
 
@@ -72,32 +75,5 @@ public class Solution {
         }
 
         visited.remove(node);
-    }
-
-    private static class DiagramNode {
-        private int v;
-        private int weight;
-        private DiagramNode next;
-
-        DiagramNode(int v, int weight) {
-            this.v = v;
-            this.weight = weight;
-        }
-
-        public DiagramNode getNext() {
-            return next;
-        }
-
-        public void setNext(DiagramNode next) {
-            this.next = next;
-        }
-
-        public int getV() {
-            return v;
-        }
-
-        public int getWeight() {
-            return weight;
-        }
     }
 }

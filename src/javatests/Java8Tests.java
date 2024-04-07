@@ -29,7 +29,7 @@ public class Java8Tests {
         int a = 9, b = 2;
         float f;
 
-        f = a / b;  // returns int. 4.0
+        f = a / b;  // returns int 4, but becomes 4.0 as f is float
         System.out.println(f);
 
         f = f / 2;

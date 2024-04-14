@@ -70,6 +70,23 @@ public class ReverseSinglyLinkedList {
         return remaining;
     }
 
+    static SinglyLinkedListNode reverseIterative(SinglyLinkedListNode head) {
+
+        SinglyLinkedListNode cur = head;
+        SinglyLinkedListNode prev = null;
+        SinglyLinkedListNode next;
+
+        while (cur != null) {
+            next = cur.next;
+
+            cur.next = prev; // change the pointer to prev node
+            prev = cur;
+            cur = next;
+        }
+
+        return prev;
+    }
+
     private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -86,8 +103,10 @@ public class ReverseSinglyLinkedList {
                 list.insertNode(listItem);
             }
 
-            SinglyLinkedListNode reversedList = reverse(list.head);
+//            SinglyLinkedListNode reversedList = reverse(list.head);
+//            printSinglyLinkedList(reversedList, " ");
 
+            SinglyLinkedListNode reversedList = reverseIterative(list.head);
             printSinglyLinkedList(reversedList, " ");
         }
 

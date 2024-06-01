@@ -15,7 +15,7 @@ public class ValidParentheses {
 
         char[] chars = s.toCharArray();
 
-        Deque q = new LinkedList<Character>();
+        Deque<Character> q = new LinkedList<>();
 
         for (char c : chars) {
 

@@ -1,8 +1,6 @@
 package com.leetcode;
 
-import java.util.ArrayDeque;
-import java.util.Arrays;
-import java.util.Deque;
+import java.util.*;
 
 // 239. Sliding Window Maximum
 public class SlidingWindowsMax {
@@ -13,25 +11,36 @@ public class SlidingWindowsMax {
 
         int[] b = new SlidingWindowsMax().maxSlidingWindow(a, k);
         System.out.println(Arrays.toString(b));
+
+        b = new SlidingWindowsMax().maxSlidingWindowPQ(a, k);
+        System.out.println(Arrays.toString(b));
     }
 
-    // TLE
-//    public int[] maxSlidingWindow(int[] nums, int k) {
-//
-//        if (nums.length == 0) return new int[0];
-//
-//        int[] ans = new int[nums.length - k + 1];
-//        for (int i = 0; i < nums.length - k + 1; i++) {
-//
-//            int max = Integer.MIN_VALUE;
-//            for (int j = i; j < i + k; j++) {
-//                max = Math.max(max, nums[j]);
-//            }
-//            ans[i] = max;
-//        }
-//
-//        return ans;
-//    }
+    // PriorityQueue
+    public int[] maxSlidingWindowPQ(int[] nums, int k) {
+
+        if (nums == null || k == 0) return nums;
+
+        int n = nums.length;
+
+        int[] ans = new int[n - k + 1];
+
+        PriorityQueue<List<Integer>> pq = new PriorityQueue<>((a, b) -> b.get(0) - a.get(0));
+
+        for (int i = 0; i < n; i++) {
+            pq.offer(List.of(nums[i], i));
+
+            while (!pq.isEmpty() && pq.peek().get(1) < i - k + 1) {
+                pq.poll();
+            }
+
+            if (i >= k - 1) {
+                ans[i - k + 1] = pq.peek().get(0);
+            }
+        }
+
+        return ans;
+    }
 
     public int[] maxSlidingWindow(int[] nums, int k) {
 

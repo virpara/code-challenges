@@ -11,6 +11,8 @@ public class AnagramWithJava8 {
         String b = "CarRace";
 
         System.out.println(isAnagram(a, b));
+
+        System.out.println(isAnagram("cat", "catt"));
     }
 
     private static boolean isAnagram2(String a, String b) {

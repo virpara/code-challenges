@@ -1,5 +1,6 @@
 package com.leetcode;
 
+// Binary Search
 public class CapacityToShipPackages {
 
     public static boolean possible(int target, int[] weights, int days) {

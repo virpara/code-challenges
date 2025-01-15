@@ -1,4 +1,6 @@
-class Scratch {
+package com.leetcode;
+
+public class CountUniqueChars {
     public static void main(String[] args) {
         String s = "filttttttter#^&\n";
 
